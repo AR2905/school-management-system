@@ -252,126 +252,131 @@ const CustomFieldForm = ({
 
             (CustomFields.length > 0) && CustomFields?.map((item: any, key: any) => {
               // console.log("item -> " , item)
-              return <div key={key} className="dataGrid flex p-2 min-w-[100%] flex-col  rounded-lg border-2 border-gray-800 bg-[#e2e8f0] shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]  ">
-
-                <li className="list-none flex  gap-2 w-[100%] justify-between gap-4 items-center">
+              return <div className="dataGrid w-full m-2  flex p-2 min-w-[100%] flex-col gap-8 rounded-lg border-2 border-gray-800 bg-[#e2e8f0] shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]  ">
 
 
-                  {/* Customfield ID */}
-                  <input type="text"
-                    className="w-1/6 bg-transparent "
-                    defaultValue={item?.id}
-                    {...register(`customFields.${item?.id}.id` as const)}
-                    hidden
+              <li className="list-none flex  gap-2 w-[100%] justify-between gap-8 items-center">
+
+                <input type="text"
+                  className="w-1/6 bg-transparent "
+                  defaultValue={item?.id}
+                  {...register(`customFields.${item?.id}.id` as const)}
+                  hidden
+
+                />
+
+
+                {/* {item.fieldName} */}
+
+                <div className="input-container w-full">
+                  <input
+                    type="text"
+                    {...register(`customFields.${item?.id}.fieldName` as const)}
+
+                    defaultValue={item?.fieldName}
+                    className="ring-[1.5px] ring-gray-300 p-2 rounded-md w-full bg-slate-100"
                   />
 
-                  {/* Customfield Name */}
+                  <p>
+                    {
+                      errors[`customFields.e${item.id}` as keyof FormData] && (
+                        <span className="text-xs text-red-500 mt-2">
+                          {errors[`customFields.e${item.id}` as keyof FormData]?.message}
 
-                  <div className="input-container w-full">
+                        </span>
+                      )
+
+                    }
+                  </p>
+                </div>
+
+
+
+
+                <Controller
+                  name={`customFields.${item?.id}.isRequired` as const}
+                  control={control}
+                  defaultValue={item?.isRequired}
+                  render={({ field }) => (
                     <input
-                      type="text"
-                      {...register(`customFields.${item?.id}.fieldName` as const)}
-                      defaultValue={item?.fieldName}
-                      className="ring-[1.5px] ring-gray-300 p-2 rounded-md w-full bg-slate-100"
+                      type="checkbox"
+                      checked={field.value}
+                      onChange={(e) => {
+                        field.onChange(e.target.checked); // Update the form state
+                      }}
                     />
-
-                    <p>
-                      {
-                        errors[`customFields.e${item.id}` as keyof FormData] && (
-                          <span className="text-xs text-red-500 mt-2">
-                            {errors[`customFields.e${item.id}` as keyof FormData]?.message}
-
-                          </span>
-                        )
-
-                      }
-                    </p>
-                  </div>
+                  )}
+                />
 
 
 
-                  {/* Customfield is Required ? */}
-
-                  <Controller
-                    name={`customFields.${item?.id}.isRequired` as const}
-                    control={control}
-                    defaultValue={item?.isRequired}
-                    render={({ field }) => (
-                      <input
-                        type="checkbox"
-                        checked={field.value}
-                        onChange={(e) => {
-                          field.onChange(e.target.checked); // Update the form state
-                        }}
-                      />
-                    )}
-                  />
-
-
-                  {/* Customfield type */}
-                  <Controller
-                    name={`customFields.${item?.id}.fieldType` as const}
-                    control={control}
-                    defaultValue={item?.fieldType} // Set the default value
-                    render={({ field }) => (
-                      <select
-                        className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm"
-                        {...field} // Spread the field props
-                        onChange={(e) => {
-                          field.onChange(e); // Call the onChange method from field
-                          handleSelectChange(e, item?.id); // Call your custom handler
-                        }}
-                      >
-                        {AllowdType.map((t) => (
-                          <option value={t} key={t}>
-                            {t}
-                          </option>
-                        ))}
-                      </select>
-                    )}
-                  />
-
-                  <div className="hover:cursor-pointer flex gap-4">
-                    {/* Delete pertucular customfield by id */}
-                    <MdDelete className="text-red-400 text-2xl " onClick={() => handleDeleteCustom(item.id)} />
-                  </div>
-                </li>
-
-                {/* if TYPE === "SELECT" */}
-                {
-                  isSelectOpen[item?.id] &&
-                  <>
-
-                    <div className="flex flex-wrap my-2 justify-start rounded-lg min-h-20   border-gray-800  ">
-                      {
-                        ObjectOfOptionArr[item?.id]?.length > 0 && ObjectOfOptionArr[item?.id]?.map((optionItem: any, index: any) => {
-                          return (
-                            <div className="w-fit p-1" key={index}>
-                              <OneOption
-                                register={register}
-                                index={index}
-                                item={optionItem}
-                                HandleDeleteOption={HandleDeleteOption}
-                                fieldId={item?.id} // Pass fieldId here
-                              />
-                            </div>
-                          );
-                        })
-                      }
-                    </div>
-
-                    <textarea name="option" id="option" onKeyUp={(e) => HandleKeyDown(e, item?.id)}
-                      className="self-center max-h-10 p-[0.25rem] resize-none border-2 rounded-md border-gray-300 text-center " placeholder="Enter Options"
-                      onChange={(e) => HandleTextAreaChange(e, item?.id)}
-                      value={ObjectOfOptionTextArea[item?.id] || ""}
-                      rows={1}
-                    ></textarea>
-                  </>
-                }
+                <Controller
+                  name={`customFields.${item?.id}.fieldType` as const}
+                  control={control}
+                  defaultValue={item?.fieldType} // Set the default value
+                  render={({ field }) => (
+                    <select
+                      className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm"
+                      {...field} // Spread the field props
+                      onChange={(e) => {
+                        field.onChange(e); // Call the onChange method from field
+                        handleSelectChange(e, item?.id); // Call your custom handler
+                      }}
+                    >
+                      {AllowdType.map((t) => (
+                        <option value={t} key={t}>
+                          {t}
+                        </option>
+                      ))}
+                    </select>
+                  )}
+                />
 
 
-              </div>
 
+
+
+
+                <div className="hover:cursor-pointer flex gap-4">
+
+                  <MdDelete className="text-red-400 text-2xl " onClick={() => handleDeleteCustom(item.id)} />
+                </div>
+              </li>
+              {
+                isSelectOpen[item?.id] &&
+                <>  <div className="flex flex-wrap my-2 justify-start rounded-lg min-h-20   border-gray-800  ">
+                  {
+                    ObjectOfOptionArr[item?.id]?.length > 0 && ObjectOfOptionArr[item?.id]?.map((optionItem: any, index: any) => {
+                      return (
+                        <div className="w-fit p-1" key={index}>
+                          <OneOption
+                            register={register}
+                            index={index}
+                            item={optionItem}
+                            HandleDeleteOption={HandleDeleteOption}
+                            fieldId={item?.id} // Pass fieldId here
+                          />
+                        </div>
+                      );
+                    })
+                  }
+                </div>
+
+                  {/* <textarea  {...register("Options.0")} id="select-box" className="rounded-md w-full border-2 border-gray-500 p-2" placeholder="Enter Options Comma seperated..."></textarea> */}
+
+
+
+                  <textarea name="option" id="option" onKeyUp={(e) => HandleKeyDown(e, item?.id)}
+                    className="self-center max-h-10 p-[0.25rem] resize-none border-2 rounded-md border-gray-300 text-center " placeholder="Enter Options"
+                    onChange={(e) => HandleTextAreaChange(e, item?.id)}
+                    value={ObjectOfOptionTextArea[item?.id] || ""}
+                    rows={1}
+                  ></textarea>
+                </>
+              }
+
+
+            </div>
             })
           )
         }
@@ -487,21 +492,19 @@ const CustomFieldForm = ({
       )}
 
       {/* Add new customfield button */}
-      <div className="field-add">
       {
-        isAdd ?
-           <>
-          </> : 
-          <button type='button' className="cursor-pointer text-center bg-[#f59e0b] text-white p-2 w-fit  self-center rounded-md px-8" onClick={() => handleToggleAdd()}>
-          {
-            isAdd ? <></> : <>+</> 
-          }
-        </button>
+        !isAdd ?
 
-      }  
-      </div>
-      
-      <button className="bg-green-400 text-white p-2 rounded-md">
+          <button type='button' className="darkyellow  text-black text-center bg-amber-400 text-white p-2 w-fit  self-center rounded-md px-8" onClick={() => handleToggleAdd()}>
+            {
+              !isAdd ? <div className="px-4 ">+</div> : <></>
+            }
+          </button>
+          : <>
+          </>
+
+      }
+      <button className="bg-green-500 text-white p-2 rounded-md">
         {/* {type === "create" ? "Create" : "Update"} */}
         {isAdd ? "UPDATE" : "ADD"}
       </button>

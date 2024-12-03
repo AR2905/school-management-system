@@ -250,3 +250,11 @@
         top: 6.94em
     }
 }
+
+.darkyellow{
+  background-color:  #f59e0b;
+}
+
+.deleted-field{ 
+  opacity:  0.3;
+}
