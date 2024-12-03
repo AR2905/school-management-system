@@ -12,7 +12,7 @@ import {
 } from "@/lib/formValidationSchemas";
 import {
   createClass,
-  CreateGrade,
+ 
   CreateNestedField,
   createSubject,
   updateClass,
@@ -221,7 +221,7 @@ console.log("11" ,DataForEntry , typeof(DataForEntry) , Array.isArray(DataForEnt
   const { teachers, grades,AllCustomFields } = relatedData;
 
   return (
-    <form className="flex flex-col gap-8" onSubmit={onSubmit}>
+    <form className="flex flex-col gap-8 max-h-[90vh] overflow-y-scroll p-2" onSubmit={onSubmit}>
       <h1 className="text-xl font-semibold">
         {type === "create" ? "Create a new class" : "Update the class"}
       </h1>
@@ -486,8 +486,7 @@ console.log("11" ,DataForEntry , typeof(DataForEntry) , Array.isArray(DataForEnt
           }
         </div>
       </>
-
-      <button type='button' onClick={() => CreateGrade()}>-</button>
+ 
       {state.error && (
         <span className="text-red-500">Something went wrong!</span>
       )}

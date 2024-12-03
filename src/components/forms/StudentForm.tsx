@@ -210,7 +210,7 @@ const StudentForm = ({
   useEffect(() => {
     if (TempCustomFields?.length > 0) {
       setTempFields([...tempFields, ...TempCustomFields])
-    }
+    } 
   }, [])
   return (
     <form className="flex flex-col gap-8 max-h-[90vh] overflow-y-scroll p-2" onSubmit={onSubmit}>

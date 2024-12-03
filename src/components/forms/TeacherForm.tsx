@@ -219,7 +219,7 @@ const TeacherForm = ({
     }
   }, [state, router, type, setOpen]);
 
-
+ 
   return (
     <form className="flex flex-col gap-8 max-h-[90vh] overflow-y-scroll p-2" onSubmit={onSubmit}>
       <div className="head-box flex justify-between">
