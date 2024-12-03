@@ -6,7 +6,7 @@ import { any, date, z, ZodError, ZodSchema } from "zod";
 
 export const entriesSchema = z.object({
   id: z.coerce.number().optional(),
-  FieldValue: z.string().optional(),
+  FieldValue: z.any().optional(),
   fieldName: z.any(),
   CustomFieldId: z.coerce.number(),
   moduleType: z.enum(["Student", "Teacher", "Parent" , "Subject", "Classes" , "Exam",  "Assignment" , "Event" , "Announcement" , "Lesson"], { message: "Invalid module type!" }).optional(),

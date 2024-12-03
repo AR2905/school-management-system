@@ -146,7 +146,7 @@ const CustomComponentTemp = ({
           </label>
           <Controller
             name={`Entries.${Information.id}.FieldValue`} 
-            defaultValue={Number(CurrentData?.FieldValue)}
+            defaultValue={Number(CurrentData?.FieldValue) || 0}
             control={control}
             render={({ field }) => (
               <input

@@ -487,17 +487,20 @@ const CustomFieldForm = ({
       )}
 
       {/* Add new customfield button */}
-   
-
+      <div className="field-add">
+      {
+        isAdd ?
+           <>
+          </> : 
           <button type='button' className="cursor-pointer text-center bg-[#f59e0b] text-white p-2 w-fit  self-center rounded-md px-8" onClick={() => handleToggleAdd()}>
-            {
-              !isAdd ? "+" : <></>
-            }
-          </button>
-          : <>
-          </>
+          {
+            isAdd ? <></> : <>+</> 
+          }
+        </button>
 
- 
+      }  
+      </div>
+      
       <button className="bg-green-400 text-white p-2 rounded-md">
         {/* {type === "create" ? "Create" : "Update"} */}
         {isAdd ? "UPDATE" : "ADD"}

@@ -126,7 +126,7 @@ const CustomComponent = ({
           <Controller
             name={`Entries.${Information.id}.FieldValue`}
             control={control}
-            defaultValue={Number(CurrentData?.FieldValue)}
+            defaultValue={Number(CurrentData?.FieldValue) || 0}
             render={({ field }) => (
               <input
                 type="number"
