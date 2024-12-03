@@ -252,7 +252,7 @@ const CustomFieldForm = ({
 
             (CustomFields.length > 0) && CustomFields?.map((item: any, key: any) => {
               // console.log("item -> " , item)
-              return <div className="dataGrid w-full m-2  flex p-2 min-w-[100%] flex-col gap-8 rounded-lg border-2 border-gray-800 bg-[#e2e8f0] shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]  ">
+              return <div key={key} className="dataGrid w-full m-2  flex p-2 min-w-[100%] flex-col gap-8 rounded-lg border-2 border-gray-800 bg-[#e2e8f0] shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]  ">
 
 
               <li className="list-none flex  gap-2 w-[100%] justify-between gap-8 items-center">
