@@ -12,6 +12,7 @@ import {
 } from "@/lib/formValidationSchemas";
 import {
   createClass,
+  CreateGrade,
   CreateNestedField,
   createSubject,
   updateClass,
@@ -486,7 +487,7 @@ console.log("11" ,DataForEntry , typeof(DataForEntry) , Array.isArray(DataForEnt
         </div>
       </>
 
-
+      <button type='button' onClick={() => CreateGrade()}>-</button>
       {state.error && (
         <span className="text-red-500">Something went wrong!</span>
       )}
@@ -498,3 +499,4 @@ console.log("11" ,DataForEntry , typeof(DataForEntry) , Array.isArray(DataForEnt
 };
 
 export default ClassForm;
+

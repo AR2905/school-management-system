@@ -13,6 +13,7 @@ import { ArrayOfCustomFields, arrayOfCustomFields,   customFieldZodResolver } fr
 import { MdDelete } from "react-icons/md";
 
 import { z } from "zod";
+import { LuDelete } from "react-icons/lu";
  
 type FormData = {
   customFields: ArrayOfCustomFields;
@@ -35,12 +36,14 @@ const OneOption = ({ item, HandleDeleteOption, register, index, fieldId }: {
 }) => {
   return <div className="box p-[0.3rem] flex m-2  bg-sky-50 border-gray-300 flex-wrap rounded-lg w-fit border-2   ">
     <input type="text"
-      className="w-fit  bg-transparent  text-black focus:outline-none cursor-default"
+      className="w-fit max-w-20 bg-transparent  text-black focus:outline-none cursor-default"
       {...register(`customFields.${fieldId}.Options.${index}`)}
       value={item}
       readOnly
     />
-    <span className="cursor-pointer text-black px-2 rounded-md bg-gray-300" onClick={() => HandleDeleteOption(index, fieldId)}>x</span>
+    <button type='button' className="  text-black text-2xl text-red-300 py-0 rounded-md   " onClick={() => HandleDeleteOption(index, fieldId)}>
+    <LuDelete />
+    </button>
   </div>
 }
 

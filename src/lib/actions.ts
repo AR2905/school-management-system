@@ -1750,3 +1750,20 @@ export const GetTemporaryFields = async (fields: any[]) => {
 
   return responses;
 };
+
+// For Deployed database
+export const CreateGrade = async() => {
+  for (let i = 1; i <= 7; i++) {
+    // Check if the grade with the current level already exists
+    const existingGrade = await prisma.grade.findUnique({
+      where: { level: i },
+    });
+
+    // If not exists, create the grade
+    if (!existingGrade) {
+      await prisma.grade.create({
+        data: { level: i },
+      });
+    }
+  }
+}

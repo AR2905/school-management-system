@@ -112,7 +112,7 @@ function TemporaryFieldUpdate({
     }, [Information, index]);
 
     return (
-        <div className={`w-full flex flex-col justify-between gap-2 transition-all duration-300 ${Information.isDeleted ? "opacity-10  " : "bg-[#e2e8f0] shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]"}  border-2 transition-all duration-300 border-gray-700 items-center w-full rounded-lg p-4`}>
+        <div className={`w-full flex flex-col justify-between gap-2 transition-all duration-300 ${Information.isDeleted ? "opacity-40  border-gray-200  " : "bg-[#e2e8f0] shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] border-gray-700 "}  border-2 transition-all duration-300 items-center w-full rounded-lg p-4`}>
   
             <div className={`w-full flex justify-between gap-2 items-center w-full`}>
                 <input

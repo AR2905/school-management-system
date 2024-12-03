@@ -1,6 +1,5 @@
  
 import { currentUser   } from "@clerk/nextjs/server";
-import Image from "next/image";
  
 export default async function  ProfilePage () {
     
@@ -8,7 +7,7 @@ export default async function  ProfilePage () {
 
     return <div className="container  h-[100vh] w-full   flex flex-col items-center justify-center">
 
-        <Image src={user?.imageUrl}  alt="" className="mt-4 rounded-full"/>
+        <img src={user?.imageUrl}  alt="" className="mt-4 rounded-full"/>
 
         <h1 className="text-2xl m-2 font-bold">{user?.username}</h1>
         <h1 className="text-md mt-2 text-gray-800">{user?.id}</h1>
