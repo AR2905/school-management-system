@@ -68,7 +68,7 @@ const CustomComponentTemp = ({
             )}
 
 
-            
+
 
 
           </label>
@@ -140,12 +140,12 @@ const CustomComponentTemp = ({
             )}
 
 
-            
+
 
 
           </label>
           <Controller
-            name={`Entries.${Information.id}.FieldValue`} 
+            name={`Entries.${Information.id}.FieldValue`}
             defaultValue={Number(CurrentData?.FieldValue) || 0}
             control={control}
             render={({ field }) => (
@@ -153,7 +153,7 @@ const CustomComponentTemp = ({
                 type="number"
                 className="C ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
                 id="number"
-              
+
                 {...field}
               // defaultValue={Number(CurrentData?.FieldValue)}
 
@@ -211,7 +211,7 @@ const CustomComponentTemp = ({
             )}
 
 
-            
+
 
 
           </label>
@@ -278,7 +278,7 @@ const CustomComponentTemp = ({
             )}
 
 
-            
+
 
 
           </label>
@@ -344,7 +344,7 @@ const CustomComponentTemp = ({
             )}
 
 
-            
+
 
 
           </label>
@@ -355,7 +355,7 @@ const CustomComponentTemp = ({
             control={control}
             defaultValue={CurrentData?.FieldValue}
             render={({ field }) => (
-              <select {...field}  id="select-box" className=" ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
+              <select {...field} id="select-box" className=" ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
 
               >
                 {isRequiredState && ( // Conditionally render hidden isRequired field
@@ -413,7 +413,7 @@ const CustomComponentTemp = ({
             )}
 
 
-            
+
 
 
           </label>

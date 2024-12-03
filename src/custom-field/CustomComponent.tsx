@@ -30,8 +30,8 @@ const CustomComponent = ({
     CurrentData = OldUpdate[0]
   }
 
- 
- 
+
+
   // Dynamic field rendering based on type
   switch (Information.fieldType) {
     case "TEXT":
@@ -47,8 +47,8 @@ const CustomComponent = ({
             )}
 
 
-            
- 
+
+
           </label>
           <Controller
             name={`Entries.${Information.id}.FieldValue`}
@@ -68,7 +68,7 @@ const CustomComponent = ({
             )}
           />
 
-          
+
 
           <Controller
             name={`Entries.${Information.id}.isRequired`}
@@ -105,7 +105,7 @@ const CustomComponent = ({
       );
 
     case "INT":
- 
+
       return (
         <div className="flex flex-col items-start m-4 w-1/4">
           <label className="text-xs text-gray-500 flex gap-1 mb-2" htmlFor="number">
@@ -117,9 +117,9 @@ const CustomComponent = ({
             )}
 
 
-<span className=" text-gray text-xs">
-                {CurrentData?.FieldValue}
-              </span>
+            <span className=" text-gray text-xs">
+              {CurrentData?.FieldValue}
+            </span>
 
 
           </label>
@@ -133,7 +133,7 @@ const CustomComponent = ({
                 className="C ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
                 id="number"
                 {...field}
-          
+
 
               />
             )}
@@ -182,7 +182,7 @@ const CustomComponent = ({
             )}
 
 
-            
+
 
 
           </label>
@@ -190,7 +190,7 @@ const CustomComponent = ({
             name={`Entries.${Information.id}.FieldValue`}
             control={control}
             defaultValue={CurrentData?.FieldValue}
- 
+
             render={({ field }) => (
               <input
                 type="date"
@@ -203,7 +203,7 @@ const CustomComponent = ({
               />
             )}
           />
-        <Controller
+          <Controller
             name={`Entries.${Information.id}.isRequired`}
             control={control}
             defaultValue={Information?.isRequired}
@@ -246,16 +246,16 @@ const CustomComponent = ({
             )}
 
 
-            
+
 
 
           </label>
           <Controller
             name={`Entries.${Information.id}.FieldValue`}
             control={control}
-            
+
             render={({ field }) => (
-              <input 
+              <input
                 type="checkbox"
                 className="C ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
                 id="checkbox"
@@ -266,7 +266,7 @@ const CustomComponent = ({
               />
             )}
           />
-<Controller
+          <Controller
             name={`Entries.${Information.id}.isRequired`}
             control={control}
             defaultValue={Information?.isRequired}
@@ -309,28 +309,28 @@ const CustomComponent = ({
             )}
 
 
-            
+
 
 
           </label>
           <Controller
-          
+
             name={`Entries.${Information.id}.FieldValue`}
             control={control}
             defaultValue={CurrentData?.FieldValue}
 
             render={({ field }) => (
-              <select {...field} id="select-box" className=" ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full" 
-                // defaultValue={CurrentData?.FieldValue}
+              <select {...field} id="select-box" className=" ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
+              // defaultValue={CurrentData?.FieldValue}
               //required={Information?.isRequired}
 
               >
                 <Controller
-            name={`Entries.${Information.id}.isRequired`}
-            control={control}
-            defaultValue={Information?.isRequired}
-            render={({ field }) => <input {...field} hidden />}
-          />
+                  name={`Entries.${Information.id}.isRequired`}
+                  control={control}
+                  defaultValue={Information?.isRequired}
+                  render={({ field }) => <input {...field} hidden />}
+                />
                 {CurrentData?.id !== undefined && (
                   <Controller
                     name={`Entries.${Information.id}.id`}
@@ -377,7 +377,7 @@ const CustomComponent = ({
             )}
 
 
-            
+
 
 
           </label>
@@ -385,13 +385,13 @@ const CustomComponent = ({
             name={`Entries.${Information.id}.FieldValue`}
             control={control}
             render={({ field }) => (
-              <input 
+              <input
                 type="text"
                 className="C ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
                 id="file"
                 defaultValue={CurrentData?.FieldValue || ""}
                 //required={Information?.isRequired}
-    disabled
+                disabled
                 {...field}
               />
             )}
@@ -437,4 +437,3 @@ const CustomComponent = ({
 };
 
 export default CustomComponent;
- 

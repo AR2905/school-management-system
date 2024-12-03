@@ -224,7 +224,7 @@ const CustomFieldForm = ({
 
 
   return (
-    <form className="flex flex-col gap-8 max-h-[80vh]  overflow-auto" onSubmit={onSubmit}>
+    <form className="flex flex-col gap-8 max-h-[80vh] min-w-fit overflow-auto overflow-x-hidden" onSubmit={onSubmit}>
 
 
       <h1 className="text-xl font-semibold">
@@ -241,7 +241,7 @@ const CustomFieldForm = ({
         hidden
       />
 
-      <div className="custom-left flex flex-wrap gap-12 justify-between">
+      <div className="custom-left flex flex-wrap gap-12 justify-between me-2" >
 
         {
           loading ? (
@@ -252,7 +252,7 @@ const CustomFieldForm = ({
 
             (CustomFields.length > 0) && CustomFields?.map((item: any, key: any) => {
               // console.log("item -> " , item)
-              return <div key={key} className="dataGrid w-full m-2  flex p-2 min-w-[100%] flex-col gap-8 rounded-lg border-2 border-gray-800 bg-[#e2e8f0] shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]  ">
+              return <div key={key} className="dataGrid max-w-full m-2 p-2 me-6 flex p-2 min-w-[100%] flex-col gap-8 rounded-lg border-2 border-gray-800 bg-[#e2e8f0] shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]  ">
 
 
               <li className="list-none flex  gap-2 w-[100%] justify-between gap-8 items-center">
@@ -390,7 +390,7 @@ const CustomFieldForm = ({
 
 
         {
-          isAdd ? <div className="customfield-row p-2 w-full rounded-lg border-2 transition-all duration-500 border-gray-300 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]">
+          isAdd ? <div className="customfield-row p-4 w-full rounded-lg border-2 transition-all duration-500 border-gray-300 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]">
             <div className="flex justify-between flex-wrap gap-4">
 
               {/* Fieldname */}
@@ -458,7 +458,7 @@ const CustomFieldForm = ({
                   ObjectOfOptionArr[0]?.length > 0 && ObjectOfOptionArr[0]?.map((item: any, index: any) => {
                     // console.log("item =", item)
                     return (
-                      <div className="  p-1" key={index}>
+                      <div className="  " key={index}>
                         <OneOption register={register} index={index} item={item} HandleDeleteOption={HandleDeleteOption} fieldId={0} />
                       </div>
                     );
@@ -471,7 +471,7 @@ const CustomFieldForm = ({
                   name="option"
                   id="option"
                   onKeyUp={(e) => HandleKeyDown(e, 0)}
-                  className="self-center max-h-10 p-[0.25rem] resize-none border-2 rounded-md border-gray-300"
+                  className="self-center max-h-10 p-[0.25rem] resize-none border-2 rounded-md border-gray-300 ms-2"
                   placeholder="Enter Options"
                   onChange={(e) => HandleTextAreaChange(e, 0)}
                   value={ObjectOfOptionTextArea[0] || ""}
