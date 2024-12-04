@@ -14,7 +14,7 @@ import Image from "next/image";
 import CustomComponentTemp from "@/custom-field/CustomComponentTemp";
 import TemporaryFieldUpdate from "@/custom-field/TemporaryFieldUpdate";
 import { MdDelete } from "react-icons/md";
- 
+
 
 const TeacherForm = ({
   type,
@@ -40,7 +40,7 @@ const TeacherForm = ({
     }
   );
 
-  const AllowdType = ["TEXT", "INT", "DATE",  "SELECT", "FILE"]
+  const AllowdType = ["TEXT", "INT", "DATE", "SELECT", "FILE"]
 
   const [Create, setCreate] = useState(false)
   const [TemporaryLable, setTemporaryLable] = useState("")
@@ -51,9 +51,9 @@ const TeacherForm = ({
   const [isSelect, setSelect] = useState(false)
   const [Update, setUpdate] = useState(false)
   const [tempFields, setTempFields] = useState<any[]>([]);
-  const [img, setImg] = useState<any>(); 
+  const [img, setImg] = useState<any>();
 
-//  Add option in the select options
+  //  Add option in the select options
   const addOption = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (event.key === "Enter" && optionInput.trim() !== "") {
       event.preventDefault();
@@ -61,7 +61,7 @@ const TeacherForm = ({
       setOptionInput("")
     }
   };
- 
+
 
   const resetFields = () => {
     setIsTemporaryRequired(false)
@@ -70,7 +70,7 @@ const TeacherForm = ({
     setOptionInput("")
     setSelect(false)
   }
- 
+
 
   const removeOption = (index: number) => {
     setTemporaryItems((prev) => prev.filter((_, i) => i !== index));
@@ -117,16 +117,16 @@ const TeacherForm = ({
 
       const invalidFields = tempFields.filter(field => !field.fieldName.trim());
       if (invalidFields.length > 0) {
-          // Handle validation error, e.g., show an error message
-          toast.error("Field names cannot be empty.");
-          return;
+        // Handle validation error, e.g., show an error message
+        toast.error("Field names cannot be empty.");
+        return;
       }
 
       const RESPONSE = await UpdateNestedFields(tempFields);
 
-      
 
- 
+
+
       if (RESPONSE.success) {
         if (Array.isArray(RESPONSE.updatedFields) && RESPONSE.updatedFields.length > 0) {
           setTempFields([...RESPONSE.updatedFields]);
@@ -150,10 +150,10 @@ const TeacherForm = ({
   };
 
   useEffect(() => {
-  }  , [ setUpdateNested  ])
+  }, [setUpdateNested])
 
 
- 
+
 
 
   function SelectInputChanged(CurrentType: any) {
@@ -169,11 +169,11 @@ const TeacherForm = ({
 
 
 
-  
+
 
   const TempCustomFields = data?.Entries
     .map((item: any) => {
-      if (item?.customField?.isTemp === true ) {
+      if (item?.customField?.isTemp === true) {
         return item.customField;
       }
       return null;
@@ -199,7 +199,7 @@ const TeacherForm = ({
 
   const router = useRouter();
 
-  
+
   const { AllCustomFields, subjects } = relatedData
 
 
@@ -219,7 +219,7 @@ const TeacherForm = ({
     }
   }, [state, router, type, setOpen]);
 
- 
+
   return (
     <form className="flex flex-col gap-8 max-h-[90vh] overflow-y-scroll p-2" onSubmit={onSubmit}>
       <div className="head-box flex justify-between">
@@ -394,201 +394,205 @@ const TeacherForm = ({
       </div>
 
       <>
-      
-
-      <div className="customs text-black mt-10">
-        <hr />
-        <p className="text-gray-600 text-center  " >Extra Information</p>
-        <hr />
-
-        <div className="custom-fields-container flex mt-4 justify-between flex-wrap gap-4">
-          {AllCustomFields?.map((field: any, key: number) => (
-            <CustomComponent
-              key={key}
-              Information={field}   //--> Each Custom Field information
-              control={control}  // -->  register here 
-              errors={errors}
-              oldData={data?.Entries}  // --> if  " UPDATE "
-            />
-          ))}
-
-        </div>
 
 
-      </div>
-      
+        <div className="customs text-black mt-10">
+          <hr />
+          <p className="text-gray-600 text-center  " >Extra Information</p>
+          <hr />
 
-
-      <div className="customs text-black mt-10">
-        <hr />
-        <p className="text-gray-600 text-center  " >Other Information</p>
-        <hr />
-
-        {
-          !Update && <div className="custom-fields-container flex mt-4 justify-between flex-wrap gap-4">
-            {
-
-              tempFields && tempFields.length > 0 ? tempFields.filter((field: any) => !field?.isDeleted).map((field: any, key: number) => {
-                return <CustomComponentTemp
-                  key={key}
-                  Information={field}   //--> Each Custom Field information
-                  control={control}  // -->  register here 
-                  errors={errors}
-                  oldData={data?.Entries}  // --> if "UPDATE"
-                  unregister = {unregister}
-                  register  = { register}
-                />
-
-              }) :
-                <div className="text-sm text-gray-300 text-center w-full">
-                  No fields! Please Create
-                </div>
-            }
+          <div className="custom-fields-container flex mt-4 justify-between flex-wrap gap-4">
+            {AllCustomFields?.map((field: any, key: number) => (
+              <CustomComponent
+                key={key}
+                Information={field}   //--> Each Custom Field information
+                control={control}  // -->  register here 
+                errors={errors}
+                oldData={data?.Entries}  // --> if  " UPDATE "
+              />
+            ))}
 
           </div>
 
-        }
 
-      </div>
-
+        </div>
 
 
 
+        <div className="customs text-black mt-10">
+          <hr />
+          <p className="text-gray-600 text-center  " >Other Information</p>
+          <hr />
 
+          {
+            !Update && <div className="custom-fields-container flex mt-4 justify-between flex-wrap gap-4">
+              {
 
-      <div className="create-field-box flex gap-2 flex-col items-center  justify-center  ">
-        {
-          Create ?
-            <div className="border-2 rounded-lg border-gray-300  w-full transition-all duration-100     bg-[#e2e8f0] shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] ">
+                tempFields && tempFields.length > 0 ? tempFields.filter((field: any) => !field?.isDeleted).map((field: any, key: number) => {
+                  return <CustomComponentTemp
+                    key={key}
+                    Information={field}   //--> Each Custom Field information
+                    control={control}  // -->  register here 
+                    errors={errors}
+                    oldData={data?.Entries}  // --> if "UPDATE"
+                    unregister={unregister}
+                    register={register}
+                  />
 
-              <div className="create-field w-full flex justify-between items-center p-4  gap-4   ">
+                }) :
+                  <div className="text-sm text-gray-300 text-center w-full">
+                    No fields! Please Create
+                  </div>
+              }
 
+            </div>
 
-                <input type="text" placeholder="Lable..." className="w-3/6 p-2 ring-[1.5px] ring-gray-300   rounded-md text-sm w-full" value={TemporaryLable} onChange={(e) => setTemporaryLable(e.target.value)} />
+          }
 
-
-                <div className="select w-2/6">
-                  <select
-                    className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
-                    onChange={(e) => SelectInputChanged(e.target.value)}
-                  >
-                    {AllowdType.map((t) => (
-                      <option value={t} key={t}
-                      >
-                        {t}
-                      </option>
-                    ))}
-                  </select>
-
-                </div>
-
-
-
-                <div className="isRequired-box w-1/6 flex justify-center">
-                  <label htmlFor="isReq">isReq</label>
-                  <input type="checkbox" name="isReq" className="ms-2" id="isReq" checked={TemporaryRequired} onChange={(e) => setIsTemporaryRequired(!TemporaryRequired)} />
-                </div>
-
-                <div className="add-btn w-1/6 flex justify-end me-4">
-                  <button type='button' className="cursor-pointer w-fit border-2 border-gray-500  bg-green-500 hover:bg-green-600 text-white p-2 rounded-md" onClick={() => setAddNested()}>Add</button>
-
-                </div>
-
-              </div>
-
-              {isSelect && (
-                <div className="flex flex-col gap-2 w-full p-4">
+        </div>
 
 
 
-                  <div className="flex flex-wrap gap-2 ">
-                    {TemporaryItems.map((item, index) => (
-                      <div
-                        key={index}
-                        className="flex items-center gap-2 bg-gray-200 p-2 rounded-md bg-sky-50 border-gray-300 border-2"
-                      >
-                        <span>{item}</span>
-                        <button
-                          type="button"
-                          className="text-black px-2 rounded-md bg-gray-200"
-                          onClick={() => removeOption(index)}
+
+
+
+        <div className="create-field-box flex gap-2 flex-col items-center  justify-center  ">
+          {
+            Create ?
+              <div className="border-2 rounded-lg border-gray-300  w-full transition-all duration-100     bg-[#e2e8f0] shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] ">
+
+                <div className="create-field w-full flex justify-between items-center p-4  gap-4   ">
+
+
+                  <input type="text" placeholder="Lable..." className="w-3/6 p-2 ring-[1.5px] ring-gray-300   rounded-md text-sm w-full" value={TemporaryLable} onChange={(e) => setTemporaryLable(e.target.value)} />
+
+
+                  <div className="select w-2/6">
+                    <select
+                      className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
+                      onChange={(e) => SelectInputChanged(e.target.value)}
+                    >
+                      {AllowdType.map((t) => (
+                        <option value={t} key={t}
                         >
-                          x
-                        </button>
-                      </div>
-                    ))}
+                          {t}
+                        </option>
+                      ))}
+                    </select>
+
                   </div>
 
-                  <textarea
 
-                    value={optionInput}
-                    onChange={(e) => setOptionInput(e.target.value)}
-                    placeholder="Add option"
-                    onKeyDown={(e) => addOption(e)}
-                    rows={1} // You can adjust the number of rows as needed
-                    className="resize-none w-fit mt-4 ring-[1.5px] ring-gray-300 p-2 rounded-md" // Optional: Prevent resizing
-                    autoComplete="false"
-                  />
+
+                  <div className="isRequired-box w-1/6 flex justify-center">
+                    <label htmlFor="isReq">isReq</label>
+                    <input type="checkbox" name="isReq" className="ms-2" id="isReq" checked={TemporaryRequired} onChange={(e) => setIsTemporaryRequired(!TemporaryRequired)} />
+                  </div>
+
+                  <div className="add-btn w-1/6 flex justify-end me-4">
+                    <button type='button' className="cursor-pointer w-fit border-2 border-gray-500  bg-green-500 hover:bg-green-600 text-white p-2 rounded-md" onClick={() => setAddNested()}>Add</button>
+
+                  </div>
+
                 </div>
-              )}
-            </div>
-            : <div className="transition-all duration-300"></div>
+
+                {isSelect && (
+                  <div className="flex flex-col gap-2 w-full p-4">
+
+
+
+                    <div className="flex flex-wrap gap-2 ">
+                      {TemporaryItems.map((item, index) => (
+                        <div
+                          key={index}
+                          className="flex items-center gap-2 bg-gray-200 p-2 rounded-md bg-sky-50 border-gray-300 border-2"
+                        >
+                          <span>{item}</span>
+                          <button
+                            type="button"
+                            className="text-black px-2 rounded-md bg-gray-200"
+                            onClick={() => removeOption(index)}
+                          >
+                            x
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+
+                    <textarea
+
+                      value={optionInput}
+                      onChange={(e) => setOptionInput(e.target.value)}
+                      placeholder="Add option"
+                      onKeyDown={(e) => addOption(e)}
+                      rows={1} // You can adjust the number of rows as needed
+                      className="resize-none w-fit mt-4 ring-[1.5px] ring-gray-300 p-2 rounded-md" // Optional: Prevent resizing
+                      autoComplete="false"
+                    />
+                  </div>
+                )}
+              </div>
+              : <div className="transition-all duration-300"></div>
+          }
+
+
+
+
+        </div>
+        <div className="field-btn flex flex gap-2  justify-start w-full">
+          <button type='button' className="text-green-600 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] transition-all duration-400  font-bolder hover:text-white border border-green-400 hover:bg-green-500  font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-green-300 dark:text-green-300 dark:hover:text-white dark:hover:bg-green-400 dark:focus:ring-green-900" onClick={() => {
+            setCreate(!Create)
+            setUpdate(false)
+          }}>{!Create ? "Create Field" : "Remove Field"} </button>
+
+
+
+          <button type="button" className="text-green-600 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] transition-all duration-400  font-bolder hover:text-white border border-green-400 hover:bg-green-500  font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-green-300 dark:text-green-300 dark:hover:text-white dark:hover:bg-green-400 dark:focus:ring-green-900"
+            onClick={() => {
+              setUpdate(!Update)
+              setCreate(false)
+            }}>
+            {!Update ? "Update Field" : "Show fields"}
+          </button>
+        </div>
+
+        {
+          Update &&
+          <div className="flex flex-col justify-center  items-center w-full gap-8 p-4   animate-fadeIn ">
+            {
+              (tempFields && tempFields.length > 0) ? tempFields.map((field: any, key: number) => {
+                return <TemporaryFieldUpdate
+                  key={key}
+                  index={key}
+                  Information={field}   //--> Each Custom Field information
+
+                  setTempFields={setTempFields} // Pass the setTempFields function to allow updates
+                  unregister={unregister}
+                />
+
+
+              }) : <div className="text-sm text-gray-300  animate-fadeIn ">
+                No fields for update! Please Create</div>
+            }
+          </div>
         }
-
-
-
-
-      </div>
-      <div className="field-btn flex flex gap-2  justify-start w-full">
-        <button type='button' className="text-green-600 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] transition-all duration-400  font-bolder hover:text-white border border-green-400 hover:bg-green-500  font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-green-300 dark:text-green-300 dark:hover:text-white dark:hover:bg-green-400 dark:focus:ring-green-900" onClick={() => {
-          setCreate(!Create)
-          setUpdate(false)
-        }}>{!Create ? "Create Field" : "Remove Field"} </button>
-
-
-
-        <button type="button" className="text-green-600 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] transition-all duration-400  font-bolder hover:text-white border border-green-400 hover:bg-green-500  font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-green-300 dark:text-green-300 dark:hover:text-white dark:hover:bg-green-400 dark:focus:ring-green-900"
-          onClick={() => {
-            setUpdate(!Update)
-            setCreate(false)
-          }}>
-          {!Update ? "Update Field" : "Show fields"}
-        </button>
-      </div>
-
-      {
-        Update &&
-        <div className="flex flex-col justify-center  items-center w-full gap-8 p-4   animate-fadeIn ">
+        <div className="update-btn w-full flex justify-center">
           {
-            (tempFields && tempFields.length > 0) ? tempFields.map((field: any, key: number) => {
-              return <TemporaryFieldUpdate
-                key={key}
-                index={key}
-                Information={field}   //--> Each Custom Field information
+            Update && tempFields?.length > 0 &&
+            <button type='button' className="cursor-pointer w-fit border-2 border-gray-500  bg-green-500 hover:bg-green-600 text-white p-2 rounded-md" onClick={() => setUpdateNested()}>Update</button >
 
-                setTempFields={setTempFields} // Pass the setTempFields function to allow updates
-unregister = {unregister}
-              />
-
-            
-            }) : <div className="text-sm text-gray-300  animate-fadeIn ">
-              No fields for update! Please Create</div>
           }
         </div>
-      }
-      <div className="update-btn w-full flex justify-center">
-        {
-          Update && tempFields?.length > 0 &&
-          <button type='button' className="cursor-pointer w-fit border-2 border-gray-500  bg-green-500 hover:bg-green-600 text-white p-2 rounded-md" onClick={() => setUpdateNested()}>Update</button >
-
-        }
-      </div>
 
       </>
 
 
       {state.error && (
-        <span className="text-red-500">Something went wrong!</span>
+        <>
+          <span className="text-red-500">Something went wrong!</span>
+          <span className="text-red-400 text-sm">Maybe Username/Password already exist</span>
+
+        </>
       )}
       <div className="flex justify-center mt-4">
         <button type="submit" className="bg-blue-400 text-white p-2 rounded-md">
@@ -596,7 +600,7 @@ unregister = {unregister}
         </button>
       </div>
 
- 
+
 
 
     </form>

@@ -1454,6 +1454,8 @@ export const EntryCreation = async (data: any, moduleType: string, USERID: any) 
 
   console.log("Raw data : "  , data)
   const CustomEntry = data?.Entries;
+
+  // Define type of id for the module type entry in the database
   let TypeOfID = ""
   let isNumber = false
   switch (moduleType) {
@@ -1501,6 +1503,8 @@ export const EntryCreation = async (data: any, moduleType: string, USERID: any) 
     default:
       break;
   }
+
+  // if there is any entries for creation or updation
   if (CustomEntry && CustomEntry?.length > 0) {
     const DataForEntry = CustomEntry?.filter((item: any) => item.FieldValue && item.CustomFieldId);
     // Map over the filtered entries and add the moduleType and teacherId if necessary
@@ -1524,17 +1528,14 @@ export const EntryCreation = async (data: any, moduleType: string, USERID: any) 
         }
       },
 
-
-
       )
 
       CreatedEntries.push(CurrEntry)
 
-
     }
  
 
-
+// Create mapper for each ids according to the CreatedEntries
     if (CreatedEntries.length > 0) {
       for (let item of CreatedEntries) {
         await prisma.csMapper.create({
@@ -1564,6 +1565,7 @@ export const EntryUpdation = async (data: any, moduleType: any, USERID: any) => 
 
   const CustomEntry = data?.Entries;
 
+  // Define type of id for the module type entry in the database
 
   try {
     let TypeOfID = ""
@@ -1750,6 +1752,4 @@ export const GetTemporaryFields = async (fields: any[]) => {
 
   return responses;
 };
-
-// For Deployed database
  
